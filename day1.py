@@ -1,5 +1,5 @@
 import re
-
+from collections import Counter
 
 from fetch_data import fetch_input
 
@@ -11,7 +11,6 @@ if __name__ == "__main__":
     print(data)
 
     r = re.compile(r"(\d*)\s*(\d*)")
-    res = 0
     l1 = []
     l2 = []
 
@@ -21,9 +20,10 @@ if __name__ == "__main__":
         l1.append(d1)
         l2.append(d2)
 
-    res = sum(abs(p[0] - p[1]) for p in zip(sorted(l1), sorted(l2)))
+    c = Counter(l2)
+    res = sum(x*c[x] for x in l1)
 
-    print(abs(res))
+    print(res)
 
         
         
